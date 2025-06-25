@@ -9,13 +9,13 @@ public class RxOrderFlow {
 
     public static void main(String[] args) {
 
-        // 1. Simulate incoming order stream
+        // Incoming order stream
         Observable<Order> incomingOrders = Observable.fromIterable(List.of(
                 new Order(UUID.randomUUID().toString(), 101, List.of("apple", "banana")),
                 new Order(UUID.randomUUID().toString(), 102, List.of("grape", "mango"))
         ));
 
-        // 2. Rx Flow: Publish to Kafka → Update Redis
+        // Publish to Kafka → Update Redis
         incomingOrders
                 .flatMapSingle(order ->
                         simulateKafkaPublish(order)
